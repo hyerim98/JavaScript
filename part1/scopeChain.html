@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scopeChain</title>
+
+    <style>
+        figure{
+            width : 500px;
+        }
+
+        figure img{
+            width : 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <p>
+            var person = 'harin'; <br><br>
+    
+            function print() { <br>
+                var person2 = 'jay'; <br>
+    
+                function innerPrint() { <br>
+                    console.log(person); <br>
+                    console.log(person2); <br>
+                } <br><br>
+                
+                innerPrint(); <br>
+    
+                console.log('print finished'); <br>
+            } <br><br>
+    
+            print(); <br>
+            console.log('finished'); <br>
+        </p>
+    </section>
+    
+    <br><br>
+
+    <section>
+        <p> 실행 컨텍스트가 실행될 때 시간에 따라 어떻게 스택에 쌓이고 제거되는지 보여줌</p>
+        <figure>
+            <img src="../img/scopeChain1.jpg">
+        </figure>
+    </section>
+
+    <br>
+
+    <section>
+        <p> 실행 컨텍스트와 내부 렉시컬 환경을 나타냄</p>
+        <figure>
+            <img src="../img/scopeChain2.jpg">
+        </figure>
+    </section>
+</body>
+</html>

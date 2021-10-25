@@ -1,0 +1,57 @@
+var address = 'Seoul';
+var members = {};
+var addFamily = function(age, name, role) {
+  this.members[role] = { age, name };
+};
+var getHeadcount = function() {
+  return Object.keys(this.members).length;
+};
+
+var family = { address, members, addFamily, getHeadcount };
+
+family.addFamily(30, 'chloe', 'aunt');
+family.addFamily(3, 'lyn', 'niece');
+family.addFamily(10, 'dangdangi', 'dog');
+console.log(family.getHeadcount());
+
+
+
+// 속성 계산명으로 객체 속성을 추가
+var obj = {};
+for (var i = 0; i < 4; i++) {
+  obj['key' + i] = i;
+}
+console.log(obj);
+
+var profile = 'chloe:30';
+var person = {
+  [profile] : true, // profile => key값이 profile로 저장됨, [profile] => key값이 profile에 저장된 데이터로 저장됨
+  [profile.split(':')[0]]: profile.split(':')[1]
+};
+console.log(person);
+
+
+
+// 비구조화 할당
+
+/* es6 전 */
+//배열선언
+const animalList = ['CAT', 'DOG', 'TIGER'];
+
+//각각 변수담기
+const cat = animalList[0];
+const dog = animalList[1];
+const tiger = animalList[2];
+
+//각각호출
+console.log(cat);
+console.log(dog);
+console.log(tiger)
+
+
+/* es6 */
+//비구조할당방식을 이용하면 4줄을 1줄 코드로 변경 가능
+const [cat1, dog1, tiger1] = ['CAT', 'DOG', 'TIGER'];
+console.log(cat1);
+console.log(dog1);
+console.log(tiger1);
