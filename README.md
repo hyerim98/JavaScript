@@ -330,5 +330,199 @@ console.log(result); // 15
 ```   
 ### 중첩된 배열을 단일하게 만들기   
 ```
+const arr = [1, [2, 3], [4, 5, 6], ['배열', '나열하기'], 'JavaScript'];
 
+const result = arr.reduce((acc, el) => {
+    return acc.concat(el);
+}, []);
+
+console.log(result); // [1,2,3,4,5,,,]
+```   
+### 객체에서 키, 값만 추출하기/ 객체를 배열로 변환
+```
+const obj = {
+    movie: 'Sunny',
+    music: 'Like Sugar',
+    style: 'Retro',
+    price: Infinity
+};
+
+// 키 추출
+const arr = Object.keys(obj);
+// 값 추출
+const arr = Object.values(obj);
+// 객체를 배열로 변환
+const modifiedObj = Object.entries(obj);
+
+console.log(arr);
+```   
+### 객체를 변경되지 않도록 하기   
+```
+let obj = {};
+
+obj.title = 'IDOL';
+obj = Object.freeze(obj);
+obj.title = 'Euphoria';
+
+console.log(obj);
+
+const changeUntilNum = (obj, num) => {
+    'use strict';
+
+    while(true) {
+        console.log(obj);
+
+        if (obj.age >= num) {
+            obj = Object.freeze(obj);
+        }
+        obj.age += 1;
+    }
+}
+
+let profile = { name: '지연', age: 25 };
+changeUntilNum(profile, 30);
+```   
+### 객체에 속성 추가 못하게 만들기   
+```
+const album = {
+    name: 'LOVE YOURSELF'
+};
+
+album.song = 'Euphoria';
+album.singer = 'RM';
+
+console.log(album);
+
+Object.seal(album); // 객체 밀봉
+
+album.comment = 'Answer';
+album.singer = 'JK';
+delete album.name;
+
+console.log(album);
+```   
+### 객체 병합 확장하기   
+```
+const obj1 = { one: 1, two: 2, three: 3 };
+const obj2 = { name: '탄이', age: 5, address: 'Seoul' };
+const obj3 = { friends: ['혜림', '현아', '현일', '우림'] };
+
+// Object.assign(반환될 객체, ... 병합될 다른 객체들)
+const newObj1 = Object.assign({}, obj1);
+const newObj2 = Object.assign({}, obj1, obj2);
+newObj1.four = 4;
+
+console.log(obj1);
+console.log(newObj1);
+console.log(newObj2);
+
+console.log('\n');
+
+const newObj3 = Object.assign(obj1, obj3);
+
+console.log(obj1);
+console.log(newObj1);
+console.log(newObj2);
+console.log(newObj3);
+```   
+### 진수 변환하기   
+```
+const dec = 531;
+
+const binByDex = dec.toString(2); // 2진수로 
+const octByDex = dec.toString(8); // 8진수로
+const hexByDex = dec.toString(16); // 16진수로
+
+console.log(binByDex);
+console.log(octByDex);
+console.log(hexByDex);
+
+
+// 10진수 아닌 진법을 다른 진법으로 변환
+const bin = 1000010011;
+const oct = 1023;
+const hex = 213;
+
+const dexByBin = parseInt(bin, 2); // 2진수를 10진수로
+const dexByOct = parseInt(oct, 8); // 8진수를 10진수로
+const dexByhex = parseInt(hex, 16); // 16진수를 10진수로
+const hexByOct = parseInt(oct, 8).toString(16); // 8진수 -> 10진수 -> 16진수
+
+console.log(dexByBin);
+console.log(dexByOct);
+console.log(dexByhex);
+console.log(hexByOct);
+```   
+### 랜덤값 구하기   
+```
+const generateRandom = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+for (let i=0; i < 5; i++) {
+    console.log(generateRandom(1, 10));
+}
+```   
+### 날짜, 시간 출력   
+```
+// 원하는 format으로 출력
+Date.prototype.yyyymmdd = function() {
+    const yyyy = this.getFullYear();
+    const mm = this.getMonth() < 9 ? 
+                `0${this.getMonth() + 1}` : this.getMonth() + 1;
+    const dd = this.getDate() < 10 ? 
+                `0${this.getDate()}` : this.getDate();
+    return '' + yyyy + mm + dd;
+}
+
+const date = new Date();
+console.log(date.yyyymmdd());
+
+
+// UTC 기준 날짜 출력
+const date = new Date();
+const dateUTC = Date.UTC(
+	date.getUTCFullYear()
+	, date.getUTCMonth()
+	, date.getUTCDate()
+	, date.getUTCHours()
+	, date.getUTCMinutes()
+	, date.getUTCSeconds()
+);
+
+console.log(new Date(dateUTC));
+
+
+// 날짜 사이의 경과 시간 계산
+Date.daysDiff = (date1, date2) => {
+    if (!(date1 instanceof Date) || !(date2 instanceof Date)) return '';
+
+    const d1 = date1.getTime();
+    const d2 = date2.getTime();
+
+    let diff = d2 - d1;
+
+    const seconds = Math.floor((diff = diff / 1000) % 60);
+    const minutes = Math.floor((diff = diff / 60) % 60);
+    const hours = Math.floor((diff = diff / 60) % 24);
+    const days = Math.floor(diff / 24);
+    return `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
+}
+
+var from = new Date(2000, 0, 1);
+var to = new Date(from.getFullYear() + 1, from.getMonth() + 3, 
+    from.getDate() + 5, from.getHours() + 4, from.getMinutes() + 30, 
+    from.getSeconds() + 50);
+
+console.log(`From   > ${from}`)
+console.log(`To     > ${to}`)
+console.log(Date.daysDiff(from, to));
+```
+### JSON   
+```
+// JSON을 문자열로 변환
+JSON.stringify(값, 리플레이서, 공백 개수)
+
+// JSON 문자열을 JSON으로 변환
+JSON.parse(값, 리플레이서)
 ```
