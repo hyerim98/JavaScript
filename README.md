@@ -93,7 +93,7 @@ console.log(str.charAt(0)); // G
 ```   
 ### 특정 문자열 위치 확인/배열의 특정 요소 위치 확인
 ```
-// 문자열
+// 문자열(indexOf)
 const str = 'Carpe diem, seize the day';
 console.log(`"e" 는 ${str.indexOf('e')} 번째 인덱스에 있습니다.`); // 4
 console.log(`대문자 "C" 는 ${str.indexOf('C')} 번째 인덱스에 있습니다.`);
@@ -111,19 +111,20 @@ const howManyHasE = (arr) => {
 
 console.log(`${arr} 에 "e" 가 있는 요소는 모두 ${howManyHasE(arr)} 개 입니다.`);
 
-// 배열
-```
-const arr = ['spring', 'summer', 'fall', 'winter', 'is', 'down'];
-
-console.log(`"winter" is in this index ${arr.indexOf('winter')}`);
-console.log(`"winter" is not in here, look this value ${arr.indexOf('winter', 4)}`); // 4 : 시작 
-```
+// 문자열(lastIndexOf)
 const str = 'Carpe diem, seize the day';
 
 console.log(`"e" 는 ${str.lastIndexOf('e')} 번째 인덱스에 있습니다.`); // 20
 console.log(`대문자 "C" 는 ${str.lastIndexOf('C')} 번째 인덱스에 있습니다.`);
 console.log(`소문자 "c" 는 ${str.lastIndexOf('c')} 번째 인덱스에 있습니다.`);
 console.log(`문자열 ", se" 는 ${str.lastIndexOf(', se')} 번째 인덱스에 있습니다.`);
+
+
+// 배열(indexOf)
+const arr = ['spring', 'summer', 'fall', 'winter', 'is', 'down'];
+
+console.log(`"winter" is in this index ${arr.indexOf('winter')}`);
+console.log(`"winter" is not in here, look this value ${arr.indexOf('winter', 4)}`); // 4 : 시작 
 ```   
 ### 특정 문자열 포함 여부 확인   
 ```
