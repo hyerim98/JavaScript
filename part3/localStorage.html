@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+        <title>로컬스토리지 예제</title>
+    </head>
+    <body>
+        <script>
+            class Cart {
+                constructor() {
+                    this._key = "app-cart";
+                    const itemString = localStorage.getItem(this._key); // 주어진 키에 해당하는 문자열을 가지고온다
+                    if (itemString) {
+                        this.items = JSON.parse(itemString); // 가져온 문자열은 JSON형식이기 때문에 JSON.parse을 통해 객체화를 한다
+                    } else {
+                        this.items = [];
+                    }
+                }
+
+                addItem(item) { // 브라우저 로컬 스토리지에 데이터 넣기
+                    this.items.push(item); // 주어진 item 객체를 items 배열에 추가
+                    const itemString = JSON.stringify(this.items); // 배열을 JSON.stringify을 통해 JSON 문자열로 만들어준다
+                    localStorage.setItem(this._key, itemString); // 주어진 키에 해당 JSON 문자열을 추가
+                    this.items = item;
+                }
+            }
+
+            const cart = new Cart();
+            console.table(cart.items);
+            cart.addItem({ name: 'A노트북', price: 20000 }); // reload 할 때마다 추가됨
+        </script>
+    </body>
+</html>

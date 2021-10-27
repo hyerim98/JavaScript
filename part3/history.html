@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>브라우저 히스토리 이해하기 예제</title>
+        
+        <style>
+            .user-list {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .user-list li {
+                list-style: none;
+                text-align: center;
+                border-radius: 100%;
+                padding: 10px;
+                border: 1px solid black;
+                margin-right: 20px;
+                margin-bottom: 10px;
+                width: 100px;
+                height: 100px;
+                cursor: pointer;
+                line-height: 100px;
+            }
+
+            .user-list li:hover {
+                background-color: deepskyblue;
+            }
+
+            .user-list li.selected {
+                background-color: royalblue;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="user-list">
+            <li data-name="jay">jay</li>
+            <li data-name="bbo">bbo</li>
+            <li data-name="harin">harin</li>
+        </ul>
+        <script>
+            const userList = document.querySelector('.user-list');
+
+            // 사용자 목록을 클릭할 때
+            userList.addEventListener('click', e => { // 사용자 목록에 클릭 이벤트 위임 처리를 한다
+                const liEl = e.target; // liEl : <li data-name="jay">jay</li>
+                if (liEl.tagName === 'LI') { // 클릭한 대상 요소의 태그명이 li일 경우에만 이벤트 처리
+                    const name = liEl.dataset.name; // dataset 속성을 통해 태그에 작성된 data-name 속상 값을 가져와 name을 정의
+                    select(userList, liEl); // 클릭한 대상 <li> 요소에 selected 클래스를 추가하고 이전에 selected 추가된 클래스를 삭제
+                    // history.pushState(state - 현재 히스토리에 해당하는 상태, title - 브라우저 상단 타이틀, url - 새로운 히스토리 URL)
+                    history.pushState(name, null, name); // 새로운 히스토리가 추가되고 전달된 인자에 의해서 URL이 변경
+                }
+            })
+
+            // popstate 이벤트가 발생할 때
+            window.addEventListener('popstate', function (e) { // 뒤로가기, 앞으로가기를 누를 때마다 브라우저 히스토리가 되고 popstate 이벤트가 발생
+                const selectedUser = document
+                    .querySelector(`.user-list [data-name="${e.state}"]`);
+                select(userList, selectedUser);
+            });
+
+            function select(ulEl, liEl) {
+                Array.from(ulEl.children)
+                    .forEach(v => v.classList.remove('selected')); // select 클래스를 지우고
+                if (liEl) liEl.classList.add('selected'); // 클릭한 것만 select 클래스를 add한다
+            }
+        </script>
+    </body>
+</html>
