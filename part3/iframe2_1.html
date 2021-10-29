@@ -1,0 +1,27 @@
+<script>
+    function submitForm() {
+      const form = document.getElementById('card-form');
+      const formData = new FormData(form);
+
+      // formdata 형식의 데이터는 전달되지 않기 때문에 별도의 객체를 정의하여 전달
+      const formObj = {
+        cardNumber: formData.get("cardNumber"),
+        holderName: formData.get("holderName"),
+      }
+      
+      window.parent.postMessage(formObj, '*'); // iframe2 문서로 메세지를 전달
+    }
+</script>
+
+
+<form id="card-form" onsubmit="submitForm()">
+    <div>
+      <label>카드번호</label>
+      <input type="text" name="cardNumber">
+    </div>
+    <div>
+      <label>이름</label>
+      <input type="text" name="holderName">
+    </div>
+    <button type="submit">결제하기</button>
+</form>

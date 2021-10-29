@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>iframe 예제</title>
+    </head>
+    <body>
+        <h1>iframe 바깥문서</h1>
+        <iframe id="iframe1" src="./iframe1_1.html" frameborder="0" 
+                width="100%" height="500px"></iframe> <!-- <iframe> 태그 작성 및 내장할 페이지의 주소를 정의 -->
+        <script>
+            const iframe1 = document.getElementById('iframe1');
+            iframe1.addEventListener('load', e => { // 내장된 문서의 로드가 끝나면 호출되는 리스너 함수를 등록
+                const iframeDocument = iframe1.contentDocument; // contentDocument 속성을 통하여 내장된 문서의 독립된 document 객체에 접근
+                iframeDocument.body.style.backgroundColor = "blue"; // 내장된 문서의 body 요소의 백그라운드 색상을 변경
+
+                const newEl = document.createElement('div'); 
+                newEl.innerHTML = '<h1>iframe 안쪽 문서';
+                newEl.style.color = 'white';
+                iframeDocument.body.appendChild(newEl); // 현재 문서에서 생성된 요소를 내장 문서에 삽입    
+
+                setTimeout(() => { // 3초 후 내장된 문서를 도메인이 다른 문서로 변경
+                    const iframeWindow = iframe1.contentWindow;
+                    iframeWindow.location = 'https://google-analytics.com';
+                }, 3000);
+            });
+    </script>
+    </body>
+</html>

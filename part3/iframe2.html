@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>iframe 메시지 교환하기</title>
+    </head>
+    <body>
+        <div>
+            <label>결제금액 :</label> <b>20000원</b>
+            <br>
+            <button id="checkout-btn">카드입력</button>
+        </div>
+        <iframe id="card-payment" width="500px" height="200px" 
+                frameborder="0"></iframe> <!-- 외부 HTML 페이지를 나중에 읽기 위해 src 속성을 작성하지 않았다 -->
+        <script>
+            const iWindow = document.getElementById('card-payment').contentWindow; // 현재 문서의 window 객체가 아닌 <iframe> 요소의 독립된 window 객체를 할당
+            
+            document.getElementById('checkout-btn') 
+            .addEventListener('click', e => {  // 카드입력 버튼을 클릭하면
+                iWindow.location = 'iframe2_1.html'; // 카드입력 문서를 불러옴
+            })
+
+            // iframe2_1에서 message가 전달되면 해당 이벤트 실행
+            window.addEventListener('message', e => { // 현재 문서의 window 객체에 message 이벤트에 대해 리스너 함수를 등록
+                console.log(e);
+            })
+        </script>
+    </body>
+</html>

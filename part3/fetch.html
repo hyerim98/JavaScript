@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Fetch API 예제</title>
+    </head>
+    <body>
+        <div id="user"></div>
+            <script>
+                const userEl = document.getElementById('user');
+                const reqPromise = 
+                fetch('https://api.github.com/users/jeado', { 
+                    headers: { Accept: 'application/json' },
+                    method: 'GET'
+                });
+
+                reqPromise
+                .then(res => { // 요청에 대한 응답이 왔을 때 호출되는 콜백 함수를 then 메소드로 등록
+                    if (res.status >= 200 && res.status < 300) {
+                        return res.json(); // 응답 본문을 JSON으로 파싱하여 return
+                    } else {
+                        return Promise.reject(new Error(`Got status ${res.status}`));
+                    }
+                })
+                .then(user => { // 앞의 Promise에서 반환한 응답 본문이 객체로 파싱되어 콜백 함수로 전달됨
+                    userEl.innerHTML =
+                    `<img src="${user.avatar_url}" /> 
+                    <br> 사용자이름 : ${user.login}, 깃헙주소: ${user.html_url}`
+                })
+                .catch(error => alert(error)); // 에러가 발생할 경우
+            </script>
+    </body>
+</html>
