@@ -9,27 +9,27 @@
             <input type="number" id="number">
             <button id="start-btn">피보나치수열 계산시작</button>      
         </div>
-        <div id="result"></div>
+        <div id="result"></div> <!-- 결과가 출력되는 곳 -->
         <script>
             const result = document.getElementById('result');
-            let isCalculation = false;
-            if (window.Worker) {
-                const fibonacciWorker = new Worker('fibonacci.js');
+            let isCalculation = false; // 현재 계산중인 여부 나타냄
+            if (window.Worker) { // 앱 워커를 사용할 수 있는지를 확인
+                const fibonacciWorker = new Worker('fibonacci.js'); // 실행할 자바스크립트 파일의 경로를 인자로 전달
                 document.getElementById('start-btn')
                     .addEventListener('click', e => {
                     if (isCalculation) {
                         return;
                     }
                     const value = document.getElementById('number').value;
-                    fibonacciWorker.postMessage({ num: value });
+                    fibonacciWorker.postMessage({ num: value }); // fibonacci 워커에 postMessage를 이용하여 인자 전달
                     result.innerHTML = '계산중...';
                     isCalculation = true;
                     });
-                fibonacciWorker.onmessage = function(e) {
+                fibonacciWorker.onmessage = function(e) { // 워커 스크립트에서 전달된 피보나치 결과가 data에 전달됨
                     result.innerHTML= e.data;
                     isCalculation = false;
                 };
-                fibonacciWorker.onerror = function(error) {
+                fibonacciWorker.onerror = function(error) { // 워커 스크립트에서 에러가 발생하면 onerror 콜백을 통해 에러를 잡을 수 있다
                     console.error('에러 발생', error.message);
                     result.innerHTML= error.message;
                     isCalculation = false;
