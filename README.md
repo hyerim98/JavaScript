@@ -1,5 +1,9 @@
 # JavaScript
 
+### Undefined   
+1. 변수에 값이 할당되지 않았을 경우    
+2. 상수와 변수로 선언하지 않은 경우
+
 ### 문자열을 숫자형 정수로 변환  
 ```
 console.log(parseInt('15', 10));
