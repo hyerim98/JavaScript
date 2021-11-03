@@ -525,9 +525,9 @@ console.log(Date.daysDiff(from, to));
 ```
 ### JSON   
 ```
-// JSON을 문자열로 변환
+// 자료를 JSON으로 변환
 JSON.stringify(값, 리플레이서, )
 
-// JSON 문자열을 JSON으로 변환
+// JSON 문자열을 자바스크립트 객체로 변환
 JSON.parse(값, 리플레이서)
 ```
