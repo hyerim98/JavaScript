@@ -1,4 +1,8 @@
-// 어떤 객체의 prototype이라는 속성은 객체 전용 옷(틀)이라고 할 수 있다.
+/*
+ * prototype
+    * 어떤 객체의 prototype이라는 속성은 객체 전용 옷(틀)이라고 할 수 있다.
+    * 메모리 절약을 위해 사용
+ */
 
 // Number 객체에 power함수를 추가
 Number.prototype.power = function(n = 2){
