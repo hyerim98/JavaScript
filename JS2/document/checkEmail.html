@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이메일 형식 확인하기</title>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let email = document.querySelector("#email")
+            let p = document.querySelector("p")
+
+            email.addEventListener('keyup', (event) => {
+                let index = email.value.indexOf('@')
+
+                if(index > 0 && index < email.value.indexOf('.')){
+                    p.textContent = '이메일 형식입니다'
+                }
+                else{
+                    p.textContent = '이메일 형식이 아닙니다'
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <input id = "email"/>
+    <p></p>
+</body>
+</html>

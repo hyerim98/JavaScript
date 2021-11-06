@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const imgs = document.querySelectorAll('img')
+       
+        imgs.forEach((img) => {
+            // contextmenu : 마우스 오른쪽 클릭 등으로 컨텍스트 메뉴를 출력할 때 
+          img.addEventListener('contextmenu', (event) => {
+            // contextmenu를 출력하는 기본 이벤트를 제거(이미지에서 마우스 오른쪽 버튼을 클릭해도 아무 반응이 없도록 ==> 불펌 방지)
+            event.preventDefault()
+          })
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <img src="http://placekitten.com/300/300" alt="">
+  </body>
+</html>

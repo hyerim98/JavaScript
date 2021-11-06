@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOMContentLoaded</title>
+    <script>
+      // HTML 태그를 쉽게 만들 수 있는 콜백 함수를 선언합니다.
+      const h1 = (text) => `<h1>${text}</h1>`
+    </script>
+
+    <!-- script 태그가 body 태그 이전에 존재하면 적용 안됨 -->
+    <script>
+      // head 태그 내부에 script 태그를 배치하면 body 태그에 있는 문서 객체에 접근할 수 없다(접근하려면 화면에 문서 객체를 모두 읽어들일 때까지 기다려야함)
+      document.body.innerHTML += h1('1번째 script 태그')
+    </script>
+
+    <!-- script 태그가 body 태그 이전에 위치해도 문제없이 실행됨(출력됨) 1 -->
+    <script>
+        // DOMContentLoaded 이벤트를 연결합니다.
+        document.addEventListener('DOMContentLoaded', () => {
+            const h1 = (text) => `<h1>${text}</h1>`
+            document.body.innerHTML += h1('DOMContentLoaded 이벤트 발생(신 버전)')
+        })
+    </script>
+
+    <!-- script 태그가 body 태그 이전에 위치해도 문제없이 실행됨(출력됨) 2 -->
+    <script>
+        document.addEventListener('load', () => {
+            document.body.innerHTML += 'load 이벤트 발생(구 버전)';
+        })
+    </script>
+  </head>
+
+  <body>
+    <script>
+      document.body.innerHTML += h1('2번째 script 태그')
+    </script>
+    <h1>1번째 h1 태그</h1>
+    <script>
+      document.body.innerHTML += h1('3번째 script 태그')
+    </script>
+    <h1>2번째 h2 태그</h1>
+  </body>
+</html>

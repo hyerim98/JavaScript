@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>letterLength with Timer</title>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let textarea = document.querySelector('textarea')
+            let p = document.querySelector('p')
+            let timerId
+
+            textarea.addEventListener('focus', (event) => { // 입력 양식 활성화가 되어있으면 50ms마다 길이 검사
+                timerId = setInterval(() => {
+                    p.textContent = `현재 글자 수 : ${textarea.value.length}`
+                }, 50)
+            })
+
+            textarea.addEventListener('blur', (event) => { // 입력 양식 비활성화 상태이면 글자수를 세는 타이머 종료
+                clearInterval(timerId)
+            })
+        })
+    </script>
+</head>
+<body>
+    <textarea></textarea>
+    <p></p>
+</body>
+</html>

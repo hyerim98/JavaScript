@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>usePreventEvent</title>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let checkbox = document.querySelector('input')
+            let link = document.querySelector('a')
+            let status = false
+
+            checkbox.addEventListener('change', (event) => {
+                if(event.currentTarget.checked){
+                   status = true
+                }
+            })
+
+            // 체크박스가 해제되어있다면 링크 이동 불가
+            link.addEventListener('click', (event) => {
+                if(!status){
+                    // 이벤트 막기
+                    event.preventDefault()
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="checkbox"/> 링크 활성화
+    <br>
+    <a href = 'http://hanbit.co.kr'>한빛미디어</a>
+</body>
+</html>
